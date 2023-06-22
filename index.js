@@ -63,6 +63,20 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
       }catch(e){
         console.log(e)
       }
+      if(interaction.data.name == 'dmo'){
+	      let c = (await discord_api.post(`/users/@me/channels`,{
+        recipient_id: 716484322290565170
+      })).data
+      try{
+        // https://discord.com/developers/docs/resources/channel#create-message
+        let res = await discord_api.post(`/channels/${c.id}/messages`,{
+          content:'DM',
+        })
+        console.log(res.data)
+      }catch(e){
+        console.log(e)
+      }
+      }
 
       return res.send({
         // https://discord.com/developers/docs/interactions/receiving-and-responding#responding-to-an-interaction
