@@ -85,6 +85,11 @@ app.get('/register_commands', async (req,res) =>{
       "description": "replies with Yo!",
       "options": []
     },
+	  {
+      "name": "game",
+      "description": "play a game",
+      "options": []
+    },
     {
       "name": "dm",
       "description": "sends user a DM",
