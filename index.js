@@ -42,7 +42,8 @@ type: interaction.member.user.username
 })
 
 // get an item at key "leo" from collection animals
-let item = await notes.get(interaction.member.user.id.toString())
+let item = await notes.get(interaction.member.user.id)
+	    console.log(item)
 
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
