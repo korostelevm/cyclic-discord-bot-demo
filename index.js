@@ -47,8 +47,12 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
         data: {
           content: `
 	  akll Help:
-          /dm - Sends you a DM
+          
           `,
+		embed: [{
+    "title": "akll Help",
+    "description": "/dm - Sends you a DM"
+  }]
         },
       });
     }
