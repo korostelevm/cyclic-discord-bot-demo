@@ -45,7 +45,6 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-  "channel_id": `${context.params.event.channel_id}`,
   "content": "",
   "tts": false,
   "embeds": [
