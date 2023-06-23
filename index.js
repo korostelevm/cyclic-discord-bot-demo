@@ -38,7 +38,7 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
     console.log(interaction.data.name)
     if(interaction.data.name == 'yo'){
 	    let leo = await notes.set(interaction.member.user.id, {
-type: interaction.member.user.username
+type: interaction.data.options.paste
 })
 
 // get an item at key "leo" from collection animals
@@ -135,7 +135,12 @@ app.get('/register_commands', async (req,res) =>{
     {
       "name": "yo",
       "description": "replies with Yo!",
-      "options": []
+      "options": [{
+      "type": 3,
+      "name": "paste",
+      "description": "store a text in this bot",
+      "required": true
+    }]
     },
 	  {
       "name": "game",
