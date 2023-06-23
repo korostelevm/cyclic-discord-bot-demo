@@ -37,13 +37,13 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
   if (interaction.type === InteractionType.APPLICATION_COMMAND) {
     console.log(interaction.data.name)
     if(interaction.data.name == 'yo'){
-	    let leo = await notes.set(1, {
+	    let leo = await notes.set("1", {
 type: "cat",
 color: "orange"
 })
 
 // get an item at key "leo" from collection animals
-let item = await notes.get(1)
+let item = await notes.get("1")
 
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
