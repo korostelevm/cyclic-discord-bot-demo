@@ -150,9 +150,7 @@ app.get('/register_commands', async (req,res) =>{
 	  {
 		  "name":"note",
 		  "description": "note in database",
-		  "options": [
-			  "text"
-		  ]
+		  "options": []
 	  }
   ]
   try
