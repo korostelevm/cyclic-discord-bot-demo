@@ -38,16 +38,16 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
     console.log(interaction.data.name)
     if(interaction.data.name == 'yo'){
 	    let leo = await notes.set(interaction.member.user.id.toString(), {
-type: interaction.data.options[0]
+type: interaction.member.user.global_name
 })
 
 // get an item at key "leo" from collection animals
-let item = await notes.get("1")
+let item = await notes.get(interaction.member.user.id.toString())
 
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-          content: JSON.stringify(item)
+          content: item.type
         },
       });
     }
@@ -134,9 +134,7 @@ app.get('/register_commands', async (req,res) =>{
     {
       "name": "yo",
       "description": "replies with Yo!",
-      "options": [
-	      "item"
-      ]
+      "options": []
     },
 	  {
       "name": "game",
