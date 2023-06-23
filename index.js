@@ -45,14 +45,28 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-          content: `
-	  akll Help:
-          
-          `,
-		embed: [{
-    "title": "akll Help",
-    "description": "/dm - Sends you a DM"
-  }]
+  "channel_id": `${context.params.event.channel_id}`,
+  "content": "",
+  "tts": false,
+  "embeds": [
+    {
+      "type": "rich",
+      "title": `? akll Help ?`,
+      "description": `akll bot comands and programs`,
+      "color": 0x00FFFF,
+      "fields": [
+        {
+          "name": `/dm`,
+          "value": ` - Sends you a DM`,
+          "inline": true
+        }
+      ],
+      "footer": {
+        "text": `akll bot is made by syntax7311`
+      }
+    }
+  ]
+});
         },
       });
     }
