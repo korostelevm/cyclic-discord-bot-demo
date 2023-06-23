@@ -70,14 +70,14 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
         },
       });
     }
-	  if(interaction.data.name == 'note'){
+	  /* if(interaction.data.name == 'note'){
 		  return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
   "content": interaction.member.user.name
 	}
 	  })
-	  }
+	  } */
     if(interaction.data.name == 'dm'){
       // https://discord.com/developers/docs/resources/user#create-dm
       let c = (await discord_api.post(`/users/@me/channels`,{
@@ -146,12 +146,12 @@ app.get('/register_commands', async (req,res) =>{
       "name": "help",
       "description": "comands",
       "options": []
-    },
-	  {
+    }
+	  /*{
 		  "name":"note",
 		  "description": "note in database",
 		  "options": []
-	  }
+	  } */
   ]
   try
   {
