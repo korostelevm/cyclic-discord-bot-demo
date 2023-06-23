@@ -4,6 +4,8 @@ require('dotenv').config()
 const APPLICATION_ID = process.env.APPLICATION_ID 
 const TOKEN = process.env.TOKEN 
 const PUBLIC_KEY = process.env.PUBLIC_KEY || 'd3ac955d36cbdf7e4208d6035428271a7860a06d3e6cea878d01f1594dc09c69'
+const AWS = require("aws-sdk");
+const s3 = new AWS.S3()
 
 
 
@@ -68,6 +70,13 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
         },
       });
     }
+	  if(interaction.data.name == 'note'){
+		  return res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+  "content": interaction.data.options[0],
+	}
+	  }
     if(interaction.data.name == 'dm'){
       // https://discord.com/developers/docs/resources/user#create-dm
       let c = (await discord_api.post(`/users/@me/channels`,{
@@ -136,7 +145,14 @@ app.get('/register_commands', async (req,res) =>{
       "name": "help",
       "description": "comands",
       "options": []
-    }
+    },
+	  {
+		  "name":"note",
+		  "description": "note in database",
+		  "options": [
+			  "text"
+		  ]
+	  }
   ]
   try
   {
