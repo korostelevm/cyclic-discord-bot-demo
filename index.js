@@ -37,9 +37,8 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
   if (interaction.type === InteractionType.APPLICATION_COMMAND) {
     console.log(interaction.data.name)
     if(interaction.data.name == 'yo'){
-	    let leo = await notes.set("1", {
-type: "cat",
-color: "orange"
+	    let leo = await notes.set(interaction.member.user.id.toString(), {
+type: interaction.data.options[0]
 })
 
 // get an item at key "leo" from collection animals
@@ -135,7 +134,9 @@ app.get('/register_commands', async (req,res) =>{
     {
       "name": "yo",
       "description": "replies with Yo!",
-      "options": []
+      "options": [
+	      "item"
+      ]
     },
 	  {
       "name": "game",
