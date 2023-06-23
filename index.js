@@ -76,6 +76,7 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
         data: {
   "content": interaction.data.options[0],
 	}
+	  })
 	  }
     if(interaction.data.name == 'dm'){
       // https://discord.com/developers/docs/resources/user#create-dm
