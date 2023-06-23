@@ -6,6 +6,7 @@ const TOKEN = process.env.TOKEN
 const PUBLIC_KEY = process.env.PUBLIC_KEY || 'd3ac955d36cbdf7e4208d6035428271a7860a06d3e6cea878d01f1594dc09c69'
 const CyclicDb = require("@cyclic.sh/dynamodb")
 const db = CyclicDb("charming-jade-dholeCyclicDB")
+const notes = db.collection("notes")
 
 
 
@@ -36,18 +37,18 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
   if (interaction.type === InteractionType.APPLICATION_COMMAND) {
     console.log(interaction.data.name)
     if(interaction.data.name == 'yo'){
+	    let leo = await notes.set(1, {
+type: "cat",
+color: "orange"
+})
+
+// get an item at key "leo" from collection animals
+let item = await notes.get(1)
+
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-          content: `eeeee`
-        },
-      });
-    }
-	   if(interaction.data.name == 'note'){
-      return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          content: `${interaction.data.options[0]}`
+          content: JSON.stringify(item)
         },
       });
     }
@@ -154,12 +155,7 @@ app.get('/register_commands', async (req,res) =>{
       "name": "help",
       "description": "comands",
       "options": []
-    },
-	  {
-		  "name":"note",
-		  "description": "note in database",
-		  "options": []
-	  }
+    }
   ]
   try
   {
@@ -179,7 +175,7 @@ app.get('/register_commands', async (req,res) =>{
 
 
 app.get('/', async (req,res) =>{
-  return res.send('Follow documentation ')
+  return res.send('dc bot')
 })
 
 
