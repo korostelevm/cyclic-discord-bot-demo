@@ -43,6 +43,14 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
         },
       });
     }
+	   if(interaction.data.name == 'note'){
+      return res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          content: `${interaction.data.options[0]}`
+        },
+      });
+    }
     if(interaction.data.name == 'help'){
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
@@ -146,12 +154,12 @@ app.get('/register_commands', async (req,res) =>{
       "name": "help",
       "description": "comands",
       "options": []
-    }
-	  /*{
+    },
+	  {
 		  "name":"note",
 		  "description": "note in database",
 		  "options": []
-	  } */
+	  }
   ]
   try
   {
