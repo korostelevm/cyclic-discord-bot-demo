@@ -37,21 +37,18 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-          content: new EmbedBuilder()
-	.setColor(0x0099FF)
-	.setTitle('Some title')
-	.setURL('https://discord.js.org/')
-	.setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
-	.setDescription('Some description here')
-	.setThumbnail('https://i.imgur.com/AfFp7pu.png')
+          content:
         },
       });
     }
-    if(interaction.data.name == 'game'){
+    if(interaction.data.name == 'help'){
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-          content: `I win lol`,
+          content: `
+	  akll Help:
+          /dm - Sends you a DM
+          `,
         },
       });
     }
@@ -118,6 +115,10 @@ app.get('/register_commands', async (req,res) =>{
 	  {
       "name": "dmo",
       "description": "sends user a DM",
+      "options": []
+    }, {
+      "name": "help",
+      "description": "comands",
       "options": []
     }
   ]
