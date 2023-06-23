@@ -38,7 +38,7 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
     console.log(interaction.data.name)
     if(interaction.data.name == 'yo'){
 	    let leo = await notes.set(interaction.member.user.id, {
-type: interaction.data.options.paste
+type: interaction.options.getString('paste')
 })
 
 // get an item at key "leo" from collection animals
