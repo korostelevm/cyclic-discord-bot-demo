@@ -37,6 +37,14 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
   if (interaction.type === InteractionType.APPLICATION_COMMAND) {
     console.log(interaction.data.name)
     if(interaction.data.name == 'yo'){
+	    if (!JSON.parse(interaction.data.options[0])){
+		    return res.send({
+		    type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+			    data: {
+				    content: "No params provided"
+			    }
+		    })
+	    } else {
 	    let leo = await notes.set(interaction.member.user.id, {
 type: interaction.data.options[0].value
 })
@@ -50,7 +58,7 @@ let item = await notes.get(interaction.member.user.id)
         data: {
           content: item.props.type
         },
-      });
+      });}
     }
     if(interaction.data.name == 'help'){
       return res.send({
