@@ -48,23 +48,7 @@ let item = await notes.get(interaction.member.user.id)
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
           content: item.props.type
-		tts: false,
-  components: [
-    {
-      "type": 1,
-      "components": [
-        {
-          "style": 1,
-          "label": `GET`,
-          "custom_id": `row_0_button_0`,
-          "disabled": false,
-          "type": 2
-        }
-      ]
-    }
-  ]
       });}
-    }
     if(interaction.data.name == 'help'){
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
