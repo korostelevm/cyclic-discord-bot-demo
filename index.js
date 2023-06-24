@@ -51,12 +51,26 @@ type: interaction.data.options[0].value
 
 // get an item at key "leo" from collection animals
 let item = await notes.get(interaction.member.user.id)
-	    console.log(item)
 
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
           content: item.props.type
+		"tts": false,
+  "components": [
+    {
+      "type": 1,
+      "components": [
+        {
+          "style": 1,
+          "label": `GET`,
+          "custom_id": `row_0_button_0`,
+          "disabled": false,
+          "type": 2
+        }
+      ]
+    }
+  ]
         },
       });}
     }
@@ -76,6 +90,11 @@ let item = await notes.get(interaction.member.user.id)
         {
           "name": `/dm`,
           "value": ` - Sends you a DM`,
+          "inline": true
+        },
+	      {
+          "name": `/yo`,
+          "value": ` - Store your secret note`,
           "inline": true
         }
       ],
@@ -145,8 +164,14 @@ app.get('/register_commands', async (req,res) =>{
       "description": "replies with Yo!",
       "type": 1,
       "options": [{
-            "name": "type",
-            "description": "Type of rock",
+            "name": "paste",
+            "description": "store a text in this bot",
+            "type": 1,
+            "required": true,
+            
+        },{
+            "name": "method",
+            "description": "post or get",
             "type": 1,
             "required": true,
             
@@ -171,8 +196,8 @@ app.get('/register_commands', async (req,res) =>{
       "name": "help",
       "description": "comands",
       "options": []
-    },
-	  {
+    }
+	  /*{
       "name": "settings",
       "description": "OWNER ONLY",
       "options": [
@@ -183,7 +208,7 @@ app.get('/register_commands', async (req,res) =>{
             "required": true,
         }
       ]
-    }
+    } */
   ]
   try
   {
