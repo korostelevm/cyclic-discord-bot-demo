@@ -137,7 +137,7 @@ app.get('/register_commands', async (req,res) =>{
       "description": "replies with Yo!",
       "type": 1,
       "options": [{
-      "type": 3,
+      "type": 1,
       "name": "paste",
       "description": "store a text in this bot",
       "required": true
