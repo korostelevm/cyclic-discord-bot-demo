@@ -47,7 +47,7 @@ let item = await notes.get(interaction.member.user.id)
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-          content: item.props.type
+          "content": item.props.type
 		"tts": false,
   "components": [
     {
