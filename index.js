@@ -163,6 +163,18 @@ app.get('/register_commands', async (req,res) =>{
       "name": "help",
       "description": "comands",
       "options": []
+    },
+	  {
+      "name": "settings",
+      "description": "OWNER ONLY",
+      "options": [
+	      {
+            "name": "type",
+            "description": "Type of settings",
+            "type": 3,
+            "required": true,
+        }
+      ]
     }
   ]
   try
