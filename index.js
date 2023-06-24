@@ -139,22 +139,9 @@ app.get('/register_commands', async (req,res) =>{
       "options": [{
             "name": "type",
             "description": "Type of rock",
-            "type": 3,
-            "required": True,
-            "choices": [
-                {
-                    "name": "Igneous",
-                    "value": "rock_igneous"
-                },
-                {
-                    "name": "Sedimentary",
-                    "value": "rock_sedimentary"
-                },
-                {
-                    "name": "Metamorphic",
-                    "value": "rock_metamorphic"
-                }
-            ]
+            "type": 1,
+            "required": true,
+            
         }
 ]
     },
