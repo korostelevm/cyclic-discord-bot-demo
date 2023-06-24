@@ -137,11 +137,26 @@ app.get('/register_commands', async (req,res) =>{
       "description": "replies with Yo!",
       "type": 1,
       "options": [{
-      "type": 1,
-      "name": "paste",
-      "description": "store a text in this bot",
-      "required": true
-    }]
+            "name": "type",
+            "description": "Type of rock",
+            "type": 3,
+            "required": True,
+            "choices": [
+                {
+                    "name": "Igneous",
+                    "value": "rock_igneous"
+                },
+                {
+                    "name": "Sedimentary",
+                    "value": "rock_sedimentary"
+                },
+                {
+                    "name": "Metamorphic",
+                    "value": "rock_metamorphic"
+                }
+            ]
+        }
+]
     },
 	  {
       "name": "game",
