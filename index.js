@@ -135,6 +135,7 @@ app.get('/register_commands', async (req,res) =>{
     {
       "name": "yo",
       "description": "replies with Yo!",
+      "type": 1,
       "options": [{
       "type": 3,
       "name": "paste",
