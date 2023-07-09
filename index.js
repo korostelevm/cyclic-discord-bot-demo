@@ -74,6 +74,10 @@ let item = await notes.get(interaction.member.user.id)
           "name": `/yo`,
           "value": ` - Store your secret note`,
           "inline": true
+        },{
+          "name": `/bobux`,
+          "value": ` - 100% legit free robux no joke guys`,
+          "inline": true
         }
       ],
       "footer": {
@@ -195,6 +199,10 @@ app.get('/register_commands', async (req,res) =>{
     }, {
       "name": "help",
       "description": "comands",
+      "options": []
+    }, {
+      "name": "bobux",
+      "description": "earn bobux",
       "options": []
     }
 	  /*{
