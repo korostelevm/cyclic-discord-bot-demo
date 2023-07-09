@@ -105,8 +105,10 @@ function whosPaying(amount) {
     return names[PersonBuyingLunch] 
 }
 	    let item = await robux.get(interaction.member.user.id) ?? 0
+	    let hey = whosPaying(amount)
+	    let result = item + hey
 	    let leo = await robux.set(interaction.member.user.id, {
-bobux: item + whosPaying(amount)
+bobux: result
 })
 
 // get an item at key "leo" from collection animals
