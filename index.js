@@ -7,6 +7,8 @@ const PUBLIC_KEY = process.env.PUBLIC_KEY || 'd3ac955d36cbdf7e4208d6035428271a78
 const CyclicDb = require("@cyclic.sh/dynamodb")
 const db = CyclicDb("charming-jade-dholeCyclicDB")
 const notes = db.collection("notes")
+const robux = db.collection("bobux")
+
 
 
 
@@ -90,6 +92,28 @@ let item = await notes.get(interaction.member.user.id)
 	}
 	  })
 	  } */
+    if(interaction.data.name == 'bobux'){
+	    amount = ["50", "100", "250", "500", "1000"];
+
+function whosPaying(amount) {
+    let upperBound = names.length;
+    let PersonBuyingLunch = Math.floor(Math.random() * upperBound)
+    return names[PersonBuyingLunch] 
+}
+	    let item = await robux.get(interaction.member.user.id) ?? 0
+	    let leo = await robux.set(interaction.member.user.id, {
+bobux: item + whosPaying(amount)
+})
+
+// get an item at key "leo" from collection animals
+item = await robux.get(interaction.member.user.id)
+	    res.send({ 
+		    type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+		    data: {
+                       content: item.props.bobux
+                    }
+	})
+    }
     if(interaction.data.name == 'dm'){
       // https://discord.com/developers/docs/resources/user#create-dm
       let c = (await discord_api.post(`/users/@me/channels`,{
