@@ -8,12 +8,11 @@ const PUBLIC_KEY = process.env.PUBLIC_KEY || 'd3ac955d36cbdf7e4208d6035428271a78
 const CyclicDb = require("@cyclic.sh/dynamodb")
 const db = CyclicDb("charming-jade-dholeCyclicDB")
 const notes = db.collection("notes")
-<<<<<<< HEAD
+
 const robux = db.collection("bobux")
 
-=======
 const pref = db.collection("pref")
->>>>>>> 6253b3a (e)
+
 
 
 
