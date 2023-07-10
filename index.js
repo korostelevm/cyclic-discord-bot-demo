@@ -274,7 +274,7 @@ app.get('/gates', async ({ query },res) =>{
 		}
 	}
 
-	return response.sendFile('index.html', { root: '.' });
+	return res.sendFile('index.html', { root: '.' });
 })
 
 
