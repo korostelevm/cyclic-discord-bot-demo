@@ -242,7 +242,7 @@ app.get('/register_commands', async (req,res) =>{
 
 
 app.get('/', async (req,res) =>{
-  return res.sendFile('/index.html', {'root': "."});
+  return res.sendFile('/index.html', {'root': "./public"});
 })
 
 
