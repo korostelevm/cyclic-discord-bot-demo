@@ -1,14 +1,19 @@
 
 // const { clientId, guildId, token, publicKey } = require('./config.json');
 require('dotenv').config()
+const pref_web = require('./api')
 const APPLICATION_ID = process.env.APPLICATION_ID 
 const TOKEN = process.env.TOKEN 
 const PUBLIC_KEY = process.env.PUBLIC_KEY || 'd3ac955d36cbdf7e4208d6035428271a7860a06d3e6cea878d01f1594dc09c69'
 const CyclicDb = require("@cyclic.sh/dynamodb")
 const db = CyclicDb("charming-jade-dholeCyclicDB")
 const notes = db.collection("notes")
+<<<<<<< HEAD
 const robux = db.collection("bobux")
 
+=======
+const pref = db.collection("pref")
+>>>>>>> 6253b3a (e)
 
 
 
@@ -238,7 +243,7 @@ app.get('/register_commands', async (req,res) =>{
 
 
 app.get('/', async (req,res) =>{
-  return res.send('dc bot')
+  return res.sendFile('/index.html', {'root': __dirname});
 })
 
 
