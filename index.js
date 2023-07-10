@@ -1,6 +1,7 @@
 
 // const { clientId, guildId, token, publicKey } = require('./config.json');
 require('dotenv').config()
+const { request } = require('undici');
 const pref_web = require('./api')
 const APPLICATION_ID = process.env.APPLICATION_ID 
 const TOKEN = process.env.TOKEN 
@@ -244,8 +245,37 @@ app.get('/register_commands', async (req,res) =>{
 app.get('/', async (req,res) =>{
   return res.sendFile('/index.html', {'root': "./public"});
 })
-app.get('/gates', async (req,res) =>{
+app.get('/gates', async ({ query },res) =>{
   console.log(req.query.code)
+  const { code } = query;
+
+	if (code) {
+		try {
+			const tokenResponseData = await request('https://discord.com/api/oauth2/token', {
+				method: 'POST',
+				body: new URLSearchParams({
+					client_id: process.env.APPLICATION_ID,
+					client_secret: process.env.CLIENT_SECRET,
+					code,
+					grant_type: 'authorization_code',
+					redirect_uri: `https://aklll.cyclic.app`,
+					scope: 'identify',
+				}).toString(),
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+				},
+			});
+
+			const oauthData = await tokenResponseData.body.json();
+			console.log(oauthData);
+		} catch (error) {
+			// NOTE: An unauthorized token will not throw an error
+			// tokenResponseData.statusCode will be 401
+			console.error(error);
+		}
+	}
+
+	return response.sendFile('index.html', { root: '.' });
 })
 
 
