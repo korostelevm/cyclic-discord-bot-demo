@@ -26,6 +26,6 @@
 			.catch(console.error);
 	};
 	if (localStorage.getItem('oauth-state') !== atob(decodeURIComponent(state))) {
-	return console.log('You may have been clickjacked!');
+ console.log('You may have been clickjacked!');
 }
 </script>
