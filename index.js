@@ -246,7 +246,6 @@ app.get('/', async (req,res) =>{
   return res.sendFile('/index.html', {'root': "./public"});
 })
 app.get('/gates', async ({ query },res) =>{
-  console.log(req.query.code)
   const { code } = query;
 
 	if (code) {
