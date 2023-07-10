@@ -6,7 +6,11 @@
 		const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
 
 		if (!accessToken) {
-			return (document.getElementById('login').style.display = 'block');
+			const randomString = generateRandomString();
+		localStorage.setItem('oauth-state', randomString);
+
+		document.getElementById('login').href += `&state=${btoa(randomString)}`;
+		return (document.getElementById('login').style.display = 'block');
 		}
 
 		fetch('https://discord.com/api/users/@me', {
@@ -21,4 +25,7 @@
 			})
 			.catch(console.error);
 	};
+	if (localStorage.getItem('oauth-state') !== atob(decodeURIComponent(state))) {
+	return console.log('You may have been clickjacked!');
+}
 </script>
