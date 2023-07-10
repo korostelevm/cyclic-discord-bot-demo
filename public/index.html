@@ -1,16 +1,12 @@
-<a id="login" style="display: none;" href="https://discord.com/api/oauth2/authorize?client_id=1040973296189046904&permissions=2147556352&redirect_uri=https%3A%2F%2Faklll.cyclic.app&response_type=code&scope=identify%20bot%20applications.commands">Identify Yourself</a>
-<p id="info"></p>
+<div id="info">Hoi!</div>
+<a id="login" style="display: none;" href="your-oauth2-URL-here">Identify Yourself</a>
 <script>
 	window.onload = () => {
 		const fragment = new URLSearchParams(window.location.hash.slice(1));
 		const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
 
 		if (!accessToken) {
-			const randomString = generateRandomString();
-		localStorage.setItem('oauth-state', randomString);
-
-		document.getElementById('login').href += `&state=${btoa(randomString)}`;
-		return (document.getElementById('login').style.display = 'block');
+			return (document.getElementById('login').style.display = 'block');
 		}
 
 		fetch('https://discord.com/api/users/@me', {
@@ -25,7 +21,4 @@
 			})
 			.catch(console.error);
 	};
-	if (localStorage.getItem('oauth-state') !== atob(decodeURIComponent(state))) {
- console.log('You may have been clickjacked!');
-}
 </script>
