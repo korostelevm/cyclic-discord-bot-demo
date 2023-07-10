@@ -244,6 +244,9 @@ app.get('/register_commands', async (req,res) =>{
 app.get('/', async (req,res) =>{
   return res.sendFile('/index.html', {'root': "./public"});
 })
+app.get('/gates', async (req,res) =>{
+  console.log(req.query.code)
+})
 
 
 app.listen(8999, () => {
