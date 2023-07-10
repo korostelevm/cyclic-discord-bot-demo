@@ -257,7 +257,7 @@ app.get('/gates', async ({ query },res) =>{
 					client_secret: process.env.CLIENT_SECRET,
 					code,
 					grant_type: 'authorization_code',
-					redirect_uri: `https://aklll.cyclic.app`,
+					redirect_uri: `https://aklll.cyclic.app/gates`,
 					scope: 'identify',
 				}).toString(),
 				headers: {
