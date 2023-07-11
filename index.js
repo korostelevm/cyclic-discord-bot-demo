@@ -7,6 +7,7 @@ const cryptosys = require('./encryption')
 const pastelgate = require('./pastelgate')
 const pref_web = require('./api')
 const { APPLICATION_ID, TOKEN, PUBLIC_KEY } = process.env
+const { Client, Events, GatewayIntentBits } = require('discord.js');
 const CyclicDb = require("@cyclic.sh/dynamodb")
 const db = CyclicDb("charming-jade-dholeCyclicDB")
 const notes = db.collection("notes")
@@ -15,7 +16,8 @@ const robux = db.collection("bobux")
 
 const pref = db.collection("pref")
 
-
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+client.login(TOKEN);
 
 
 const axios = require('axios')
@@ -38,7 +40,7 @@ const discord_api = axios.create({
 });
 
 
-
+client.user.setActivity('type /help');
 
 app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
   const interaction = req.body;
