@@ -12,7 +12,7 @@ const encryptionIV = crypto
   .substring(0, 16)
 
 // Encrypt data
-export function encryptData(data) {
+module.exports.encryptData = function(data) {
   const cipher = crypto.createCipheriv(ENCRYPT_TYPE, key, encryptionIV)
   return Buffer.from(
     cipher.update(data, 'utf8', 'hex') + cipher.final('hex')
@@ -20,7 +20,7 @@ export function encryptData(data) {
 }
 
 // Decrypt data
-export function decryptData(encryptedData) {
+module.exports.decryptData = function(encryptedData) {
   const buff = Buffer.from(encryptedData, 'base64')
   const decipher = crypto.createDecipheriv(ENCRYPT_TYPE, key, encryptionIV)
   return (
