@@ -3,7 +3,7 @@
 require('dotenv').config()
 
 const { request } = require('undici');
-const crypto = require('./encryption')
+const cryptosys = require('./encryption')
 const pref_web = require('./api')
 const { APPLICATION_ID, TOKEN, PUBLIC_KEY } = process.env
 const CyclicDb = require("@cyclic.sh/dynamodb")
@@ -283,7 +283,7 @@ app.get('/gates', async ({ query },res) =>{
   
 	return res.render("confirmation"), {
     "username": userResult.member.user.global_name,
-    "key": crypto.encryptData(oauthData.access_token)
+    "key": cryptosys.encryptData(oauthData.access_token)
   };
 })
 
