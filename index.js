@@ -19,6 +19,7 @@ const pref = db.collection("pref")
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
+  c.user.setPresence({ activities: [{ name: 'activity' }], status: 'idle' });
 });
 
 client.login(TOKEN);
