@@ -60,7 +60,7 @@ let item = await notes.get(interaction.member.user.id)
       }});
     }
     if(interaction.data.name == 'help'){
-      const message = await notes.get("0").props.message
+      const message = await notes.get("0")
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
@@ -70,7 +70,7 @@ let item = await notes.get(interaction.member.user.id)
     {
       "type": "rich",
       "title": `? kakll Help (0.1.0 Beta Golden Gate Peak) ?`,
-      "description": `<b>akll bot comands and programs</b>\n${message}`,
+      "description": `<b>akll bot comands and programs</b>\n${message.props.message}`,
       "color": 0x00FFFF,
       "fields": [
         {
