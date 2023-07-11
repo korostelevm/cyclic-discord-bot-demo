@@ -18,7 +18,7 @@ async function postData(url = "", data = {}) {
   });
   return response.json(); // parses JSON response into native JavaScript objects
 }
-function change(id, value){postData("https://aklll.cyclic.app/admin2", { command: "message", value: id.innerText }).then((data) => {
+function change(id, value){postData("https://aklll.cyclic.app/admin2", { command: "message", value: id.value }).then((data) => {
   console.log(data); // JSON data parsed by `data.json()` call
 });}
 
