@@ -1,0 +1,13 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+<script>
+    function yes(){
+        
+Cookies.set('access_key', '<%= key%>', { expires: 365 });
+    }
+    function no(){
+        window.location.replace("/");
+    }
+</script>
+<p>Are you <%= title%>?</p>
+<button onclick="no()">No</button>
+<button onclick="yes()">Yes</button>

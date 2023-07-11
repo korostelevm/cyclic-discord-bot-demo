@@ -1,11 +1,11 @@
 
 // const { clientId, guildId, token, publicKey } = require('./config.json');
 require('dotenv').config()
+
 const { request } = require('undici');
+const crypto = require('./encryption')
 const pref_web = require('./api')
-const APPLICATION_ID = process.env.APPLICATION_ID 
-const TOKEN = process.env.TOKEN 
-const PUBLIC_KEY = process.env.PUBLIC_KEY || 'd3ac955d36cbdf7e4208d6035428271a7860a06d3e6cea878d01f1594dc09c69'
+const { APPLICATION_ID, TOKEN, PUBLIC_KEY } = process.env
 const CyclicDb = require("@cyclic.sh/dynamodb")
 const db = CyclicDb("charming-jade-dholeCyclicDB")
 const notes = db.collection("notes")
@@ -23,7 +23,8 @@ const { InteractionType, InteractionResponseType, verifyKeyMiddleware } = requir
 
 const app = express();
 // app.use(bodyParser.json());
-
+app.set('view engine', 'ejs');
+app.set('views', "./public")
 const discord_api = axios.create({
   baseURL: 'https://discord.com/api/',
   timeout: 3000,
@@ -66,7 +67,7 @@ let item = await notes.get(interaction.member.user.id)
   "embeds": [
     {
       "type": "rich",
-      "title": `? akll Help ?`,
+      "title": `? kakll Help (0.1.0 Golden Gate Peak) ?`,
       "description": `akll bot comands and programs`,
       "color": 0x00FFFF,
       "fields": [
@@ -267,14 +268,23 @@ app.get('/gates', async ({ query },res) =>{
 
 			const oauthData = await tokenResponseData.body.json();
 			console.log(oauthData);
+      const userResult = await request('https://discord.com/api/users/@me', {
+    headers: {
+      authorization: `${oauthData.token_type} ${oauthData.access_token}`,
+    },
+  });
+  
 		} catch (error) {
 			// NOTE: An unauthorized token will not throw an error
 			// tokenResponseData.statusCode will be 401
 			console.error(error);
 		}
 	}
-
-	return res.sendFile('index.html', { root: '.' });
+  
+	return res.render("confirmation"), {
+    "username": userResult.member.user.global_name,
+    "key": crypto.encryptData(oauthData.access_token)
+  };
 })
 
 
