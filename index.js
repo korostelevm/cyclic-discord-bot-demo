@@ -287,7 +287,7 @@ app.get('/gates', async ({ query },res) =>{
     "key": cryptosys.encryptData(oauthData.access_token)
   };
 })
-app.get("/etaskpanel", pastelgate.isAuth, require('./admin')())
+app.get("/etaskpanel", pastelgate.isAuth, (req,res) => require('./admin')())
 
 app.listen(8999, () => {
 
