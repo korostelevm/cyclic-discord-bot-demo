@@ -69,7 +69,7 @@ let item = await notes.get(interaction.member.user.id)
     {
       "type": "rich",
       "title": `? kakll Help (0.1.0 Beta Golden Gate Peak) ?`,
-      "description": `akll bot comands and programs\n${notes.get("0")}`,
+      "description": `akll bot comands and programs\n${await notes.get("0")}`,
       "color": 0x00FFFF,
       "fields": [
         {
