@@ -69,7 +69,7 @@ let item = await notes.get(interaction.member.user.id)
     {
       "type": "rich",
       "title": `? kakll Help (0.1.0 Beta Golden Gate Peak) ?`,
-      "description": `akll bot comands and programs`,
+      "description": `akll bot comands and programs\n${notes.get("0").message}`,
       "color": 0x00FFFF,
       "fields": [
         {
@@ -287,7 +287,7 @@ app.get('/gates', async ({ query },res) =>{
     "key": cryptosys.encryptData(oauthData.access_token)
   };
 })
-app.get("/etaskpanel", pastelgate.isAuth, (req,res) => {require('./admin')(req,res)})
+app.get("/etaskpanel", pastelgate.isAuth, (req,res) => {require('./admin').ui(req,res)})
 
 app.listen(8999, () => {
 

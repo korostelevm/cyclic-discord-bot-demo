@@ -12,3 +12,13 @@ module.exports.isAuth = (req, res, next) => {
       next();
     }
 }
+module.exports.isAuthkey = (req, res, next) => {
+  const user = req.headers.authorization
+  if (user == key) {
+    next();
+  } else {
+    res.status(401);
+    res.setHeader('WWW-Authenticate', 'Basic realm="Node"');
+    res.send('Access forbidden');
+  }
+}
