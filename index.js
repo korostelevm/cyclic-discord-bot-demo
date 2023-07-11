@@ -43,10 +43,6 @@ const discord_api = axios.create({
 	"Authorization": `Bot ${TOKEN}`
   }
 });
-
-
-client.user.setActivity('type /help');
-
 app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
   const interaction = req.body;
 
