@@ -1,6 +1,6 @@
 const CyclicDb = require("@cyclic.sh/dynamodb")
 const db = CyclicDb("charming-jade-dholeCyclicDB")
-const key = process.env.ENCRYPTION_KEY
+const key = process.env.ADMIN_API_KEY
 var notes = db.collection("notes")
 module.exports.ui = function(req,res) {
  res.render("admin", {
