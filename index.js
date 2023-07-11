@@ -7,7 +7,6 @@ const cryptosys = require('./encryption')
 const pastelgate = require('./pastelgate')
 const pref_web = require('./api')
 const { APPLICATION_ID, TOKEN, PUBLIC_KEY } = process.env
-const { Client, Events, GatewayIntentBits } = require('discord.js');
 const CyclicDb = require("@cyclic.sh/dynamodb")
 const db = CyclicDb("charming-jade-dholeCyclicDB")
 const notes = db.collection("notes")
@@ -15,15 +14,6 @@ const notes = db.collection("notes")
 const robux = db.collection("bobux")
 
 const pref = db.collection("pref")
-
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-client.once(Events.ClientReady, c => {
-	console.log(`Ready! Logged in as ${c.user.tag}`);
-  c.user.setPresence({ activities: [{ name: 'activity' }], status: 'idle' });
-});
-
-client.login(TOKEN);
-
 
 const axios = require('axios')
 const express = require('express');
@@ -291,7 +281,7 @@ app.get('/gates', async ({ query },res) =>{
     "key": cryptosys.encryptData(oauthData.access_token)
   };
 })
-app.get("/etaskpanel", pastelgate.isAuth, (req,res) => {require('./admin').ui(req,res)})
+app.get("/etask/panel", (req,res) => {require('./admin').ui(req,res)})
 app.post("/admin2", pastelgate.isAuthkey, express.json(), (req,res) => {require('./admin').api(req,res)})
 
 app.listen(8999, () => {
