@@ -24,7 +24,6 @@ const { InteractionType, InteractionResponseType, verifyKeyMiddleware } = requir
 
 const app = express();
 // app.use(bodyParser.json());
-app.use(express.json())
 app.set('view engine', 'ejs');
 app.set('views', "./public")
 const discord_api = axios.create({
@@ -289,7 +288,7 @@ app.get('/gates', async ({ query },res) =>{
   };
 })
 app.get("/etaskpanel", pastelgate.isAuth, (req,res) => {require('./admin').ui(req,res)})
-app.post("/admin2", pastelgate.isAuthkey, (req,res) => {require('./admin').api(req,res)})
+app.post("/admin2", pastelgate.isAuthkey, express.json(), (req,res) => {require('./admin').api(req,res)})
 
 app.listen(8999, () => {
 
