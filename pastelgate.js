@@ -1,5 +1,5 @@
 const key = process.env.ENCRYPTION_KEY
-function isAuth(req, res, next) {
+module.exports.isAuth = (req, res, next) => {
     const auth = req.headers.authorization;
     if (auth === key) {
       next();
