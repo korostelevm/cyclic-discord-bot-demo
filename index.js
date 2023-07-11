@@ -4,6 +4,7 @@ require('dotenv').config()
 
 const { request } = require('undici');
 const cryptosys = require('./encryption')
+const pastelgate = require('./pastelgate')
 const pref_web = require('./api')
 const { APPLICATION_ID, TOKEN, PUBLIC_KEY } = process.env
 const CyclicDb = require("@cyclic.sh/dynamodb")
@@ -67,7 +68,7 @@ let item = await notes.get(interaction.member.user.id)
   "embeds": [
     {
       "type": "rich",
-      "title": `? kakll Help (0.1.0 Golden Gate Peak) ?`,
+      "title": `? kakll Help (0.1.0 Beta Golden Gate Peak) ?`,
       "description": `akll bot comands and programs`,
       "color": 0x00FFFF,
       "fields": [
