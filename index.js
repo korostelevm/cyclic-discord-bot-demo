@@ -24,6 +24,7 @@ const { InteractionType, InteractionResponseType, verifyKeyMiddleware } = requir
 
 const app = express();
 // app.use(bodyParser.json());
+app.use(express.json())
 app.set('view engine', 'ejs');
 app.set('views', "./public")
 const discord_api = axios.create({
