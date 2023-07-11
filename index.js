@@ -44,7 +44,7 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
   const interaction = req.body;
 
   if (interaction.type === InteractionType.APPLICATION_COMMAND) {
-    console.log(interaction.data.name)
+    // console.log(interaction.data.name)
     if(interaction.data.name == 'yo'){
 	    let leo = await notes.set(interaction.member.user.id, {
 type: interaction.data.options[0].value
@@ -69,7 +69,7 @@ let item = await notes.get(interaction.member.user.id)
     {
       "type": "rich",
       "title": `? kakll Help (0.1.0 Beta Golden Gate Peak) ?`,
-      "description": `akll bot comands and programs\n${await notes.get("0").props.message}`,
+      "description": `akll bot comands and programs\n${JSON.stringify(await notes.get("0"))}`,
       "color": 0x00FFFF,
       "fields": [
         {
