@@ -245,7 +245,7 @@ app.get('/', async (req,res) =>{
   if (req.cookies.access_key){
     try {
       
-      var auth_key = cryptosys.decryptData(Buffer.from(req.cookie['access_key'], 'base64').toString('ascii'))
+      var auth_key = cryptosys.decryptData(Buffer.from(req.cookies['access_key'], 'base64').toString('ascii'))
       const userResult = await request('https://discord.com/api/users/@me', {
     headers: {
       authorization: `Bearer ${auth_key}`,
