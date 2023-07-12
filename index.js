@@ -241,7 +241,8 @@ app.get('/register_commands', async (req,res) =>{
 
 
 app.get('/', async (req,res) =>{
-  if (req.cookie['access_key']){
+  console.log(req.cookies)
+  if (req.cookies['access_key']){
     try {
       
       var auth_key = cryptosys.decryptData(Buffer.from(req.cookie['access_key'], 'base64').toString('ascii'))
