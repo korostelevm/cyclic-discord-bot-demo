@@ -21,6 +21,8 @@ const { InteractionType, InteractionResponseType, verifyKeyMiddleware } = requir
 
 const app = express();
 // app.use(bodyParser.json());
+const cookieParser = require("cookie-parser");
+app.use(cookieParser())
 app.set('view engine', 'ejs');
 app.set('views', "./public")
 const discord_api = axios.create({
@@ -62,7 +64,7 @@ let item = await notes.get(interaction.member.user.id)
   "embeds": [
     {
       "type": "rich",
-      "title": `? kakll Help (0.1.1 Beta GGPeakDescend) ?`,
+      "title": `? kakll Help (0.1.2 (Beta) Web UI update) ?`,
       "description": `<b>akll bot comands and programs</b>\n${message.props.message}`,
       "color": 0x00FFFF,
       "fields": [
@@ -239,7 +241,29 @@ app.get('/register_commands', async (req,res) =>{
 
 
 app.get('/', async (req,res) =>{
-  return res.sendFile('/index.html', {'root': "./public"});
+  if (req.cookie['access_key']){
+    try {
+      
+      var auth_key = cryptosys.decryptData(Buffer.from(req.cookie['access_key'], 'base64').toString('ascii'))
+      const userResult = await request('https://discord.com/api/users/@me', {
+    headers: {
+      authorization: `Bearer ${auth_key}`,
+    },
+  });
+  const e2 = await userResult.body.json()
+     return res.render('index', {
+      username: e2.global_name
+     })
+    } catch(e) {
+      console.error(e)
+      return res.sendFile('/login.html', {'root': "./public"});
+    }
+    
+    
+  }else{
+    return res.sendFile('/login.html', {'root': "./public"});
+  }
+  
 })
 app.get('/gates', async ({ query },res) =>{
   const { code } = query;
