@@ -2,12 +2,12 @@
 <script>
     function yes(){
         
-Cookies.set('access_key', '<%= key%>', { expires: 365 });
+Cookies.set('access_key', '<%= key%>', { expires: 7 });
     }
     function no(){
         window.location.replace("/");
     }
 </script>
-<p>Are you <%= title%>?</p>
+<p>Are you <%= username %>?</p>
 <button onclick="no()">No</button>
 <button onclick="yes()">Yes</button>

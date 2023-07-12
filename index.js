@@ -271,7 +271,7 @@ app.get('/gates', async ({ query },res) =>{
   const e2 = await userResult.body.json()
   console.log(e2)
   return res.render("confirmation", {
-    "username": e2.member.user.global_name,
+    "username": e2.global_name,
     "key": cryptosys.encryptData(oauthData.access_token)
   })
 		} catch (error) {
