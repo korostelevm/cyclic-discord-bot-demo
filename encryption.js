@@ -22,7 +22,7 @@ module.exports.encryptData = function(data) {
 // Decrypt data
 module.exports.decryptData = function(encryptedData) {
   const buff = Buffer.from(encryptedData, 'base64')
-  const decipher = crypto.createDecipheriv(ENCRYPT_TYPE, key, encryptionIV)
+  const decipher = crypto.createDecipheriv(ENCRYPTION_TYPE, key, encryptionIV)
   return (
     decipher.update(buff.toString('utf8'), 'hex', 'utf8') +
     decipher.final('utf8')
