@@ -13,7 +13,7 @@ const encryptionIV = crypto
 
 // Encrypt data
 module.exports.encryptData = function(data) {
-  const cipher = crypto.createCipheriv(ENCRYPT_TYPE, key, encryptionIV)
+  const cipher = crypto.createCipheriv(ENCRYPTION_TYPE, key, encryptionIV)
   return Buffer.from(
     cipher.update(data, 'utf8', 'hex') + cipher.final('hex')
   ).toString('base64') // Encrypts data and converts to hex and base64
