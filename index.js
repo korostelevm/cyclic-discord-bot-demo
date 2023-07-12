@@ -270,7 +270,7 @@ app.get('/gates', async ({ query },res) =>{
   });
   console.log(userResult)
   return res.render("confirmation", {
-    "username": userResult.member.user.global_name,
+    "username": userResult.body.json().member.user.global_name,
     "key": cryptosys.encryptData(oauthData.access_token)
   })
 		} catch (error) {
