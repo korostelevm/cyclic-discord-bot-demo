@@ -268,7 +268,11 @@ app.get('/gates', async ({ query },res) =>{
       authorization: `${oauthData.token_type} ${oauthData.access_token}`,
     },
   });
-  
+  console.log(userResult)
+  return res.render("confirmation", {
+    "username": userResult.member.user.global_name,
+    "key": cryptosys.encryptData(oauthData.access_token)
+  })
 		} catch (error) {
 			// NOTE: An unauthorized token will not throw an error
 			// tokenResponseData.statusCode will be 401
@@ -276,10 +280,7 @@ app.get('/gates', async ({ query },res) =>{
 		}
 	}
   
-	return res.render("confirmation"), {
-    "username": userResult.member.user.global_name,
-    "key": cryptosys.encryptData(oauthData.access_token)
-  };
+	
 })
 app.get("/etask/panel", (req,res) => {require('./admin').ui(req,res)})
 app.post("/etask/api", express.json(), (req,res) => {require('./admin').api(req,res)})
