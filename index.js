@@ -3,9 +3,9 @@
 require('dotenv').config()
 
 const { request } = require('undici');
-const cryptosys = require('./encryption')
 const pastelgate = require('./pastelgate')
 const pref_web = require('./api')
+const cool = require('./db_m')
 const { APPLICATION_ID, TOKEN, PUBLIC_KEY } = process.env
 const CyclicDb = require("@cyclic.sh/dynamodb")
 const db = CyclicDb("charming-jade-dholeCyclicDB")
@@ -244,11 +244,9 @@ app.get('/', async (req,res) =>{
   console.log(req.cookies)
   if (req.cookies.access_key){
     try {
-      
-      var auth_key = cryptosys.decryptData(Buffer.from(req.cookies['access_key'], 'base64').toString('ascii'))
       const userResult = await request('https://discord.com/api/users/@me', {
     headers: {
-      authorization: `Bearer ${auth_key}`,
+      authorization: `Bearer ${req.cookies.access_key}`,
     },
   });
   const e2 = await userResult.body.json()
@@ -297,7 +295,7 @@ app.get('/gates', async ({ query },res) =>{
   console.log(e2)
   return res.render("confirmation", {
     "username": e2.global_name,
-    "key": cryptosys.encryptData(oauthData.access_token)
+    "key": oauthData.access_token
   })
 		} catch (error) {
 			// NOTE: An unauthorized token will not throw an error
@@ -310,6 +308,7 @@ app.get('/gates', async ({ query },res) =>{
 })
 app.get("/etask/panel", (req,res) => {require('./admin').ui(req,res)})
 app.post("/etask/api", express.json(), (req,res) => {require('./admin').api(req,res)})
+app.post("/api/guilds/:guild", express.json(), (req,res)=>{pref_web(pref, req,res)})
 
 app.listen(8999, () => {
 

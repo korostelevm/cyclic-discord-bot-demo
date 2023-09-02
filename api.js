@@ -1,10 +1,15 @@
-module.exports = function(app){
-  
-    app.get('/api/:guild', function(req, res){
-       response.send("Simple Call users Route from Here!");
-    });
-  
-    app.get('/posts', function(req, res){
-       response.send("Simple Call posts Route from Here!");
-    });
+const { response } = require("express")
+
+module.exports = function(db, req,res){
+   const data = req.body
+   try {
+    if (data.type == "preferences") {
+      let currentprefs = data.pref
+      res.status(204)
+    }
+   } catch(e){
+    console.error(e)
+    res.status(500).json({"type": "error"})
+   }
+   
 }
