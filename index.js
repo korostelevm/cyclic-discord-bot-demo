@@ -250,8 +250,17 @@ app.get('/', async (req,res) =>{
     },
   });
   const e2 = await userResult.body.json()
+ /* const servers = await request("https://discord.com/api/v6/users/@me/guilds", {
+    headers: {
+        authorization: "Bot " + process.env.TOKEN
+    }
+})
+const e3 = await servers.body.json()
+e3.array.forEach(element => {
+  
+}); */
      return res.render('index', {
-      username: e2.global_name
+      username: JSON.stringify(e2)
      })
     } catch(e) {
       console.error(e)
