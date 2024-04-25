@@ -198,7 +198,6 @@ app.get('/register_commands', async (req,res) =>{
     {
       "name": "yo",
       "description": "replies with Yo!",
-      "type": 1,
       "options": [{
             "name": "paste",
             "description": "store a text in this bot",
@@ -233,7 +232,6 @@ app.get('/register_commands', async (req,res) =>{
     },{
       "name": "forms",
       "description": "creates a form and sends to channel",
-      "type": 1,
       "options": [
         {
             "name": "fname",
