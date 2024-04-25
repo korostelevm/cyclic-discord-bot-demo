@@ -205,12 +205,6 @@ app.get('/register_commands', async (req,res) =>{
             "type": 1,
             "required": true,
             
-        },{
-            "name": "method",
-            "description": "post or get",
-            "type": 1,
-            "required": true,
-            
         }
 ]
     },
@@ -240,14 +234,14 @@ app.get('/register_commands', async (req,res) =>{
       "name": "forms",
       "description": "creates a form and sends to channel",
       "type": 1,
-      "options": [{
-            "name": "formname",
-            "description": "name of the form",
+      "options": [
+        {
+            "name": "fname",
+            "description": "Name of the form",
             "type": 1,
-            "required": true,
-            
+            "required": true
         }
-]
+    ]
     }
 	  /*{
       "name": "settings",
