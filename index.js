@@ -241,7 +241,7 @@ app.get('/register_commands', async (req,res) =>{
       "description": "creates a form and sends to channel",
       "type": 1,
       "options": [{
-            "name": "name",
+            "name": "formname",
             "description": "name of the form",
             "type": 1,
             "required": true,
