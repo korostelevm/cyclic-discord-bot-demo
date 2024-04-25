@@ -54,6 +54,35 @@ let item = await notes.get(interaction.member.user.id)
           content: item.props.type
       }});
     }
+    if (interaction.data.custom_id == 'form_button'){
+	    return res.send({
+  "title": interaction.message.components.components.custom_id.split("_")[2],
+  "custom_id": interaction.message.components.components.custom_id.split("_")[2] + "modal",
+  "components": [{
+    "type": 1,
+    "components": [{
+      "type": 4,
+      "custom_id": "name",
+      "label": "Name",
+      "style": 1,
+      "min_length": 1,
+      "max_length": 4000,
+      "placeholder": "enter your name here",
+      "required": true
+    },
+		  {
+      "type": 4,
+      "custom_id": "description",
+      "label": "Description",
+      "style": 1,
+      "min_length": 1,
+      "max_length": 4000,
+      "placeholder": "it could be anything",
+      "required": true
+    }]
+  }]
+})
+    }
     if (interaction.data.name == 'forms'){
 	    return res.send({
 	     type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
@@ -68,7 +97,7 @@ let item = await notes.get(interaction.member.user.id)
                     "type": 2,
                     "label": "Open " + interaction.data.options[0].value,
                     "style": 1,
-                    "custom_id": "form_button"
+                    "custom_id": "form_button_" + interaction.data.options[0].value
                 }
             ]
 
