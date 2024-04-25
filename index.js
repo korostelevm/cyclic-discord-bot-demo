@@ -75,7 +75,7 @@ let item = await notes.get(interaction.member.user.id)
         }
     ]
 	     }
-	    }
+	    })
     }
     if(interaction.data.name == 'help'){
       const message = await notes.get("0")
