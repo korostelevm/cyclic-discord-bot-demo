@@ -54,6 +54,29 @@ let item = await notes.get(interaction.member.user.id)
           content: item.props.type
       }});
     }
+    if (interaction.data.name == 'forms'){
+	    return res.send({
+	     type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+	     data: {
+		     "content": "A form has appeared",
+		     "tts": false,
+		     "components": [
+        {
+            "type": 1,
+            "components": [
+                {
+                    "type": 2,
+                    "label": "Open the form",
+                    "style": 1,
+                    "custom_id": "form_button"
+                }
+            ]
+
+        }
+    ]
+	     }
+	    }
+    }
     if(interaction.data.name == 'help'){
       const message = await notes.get("0")
       return res.send({
@@ -64,7 +87,7 @@ let item = await notes.get(interaction.member.user.id)
   "embeds": [
     {
       "type": "rich",
-      "title": `? kakll Help (0.1.2 (Beta) Web UI update) ?`,
+      "title": `? kakll Help (0.1.4 (Beta) Forms Update) ?`,
       "description": `<b>akll bot comands and programs</b>\n${message.props.message}`,
       "color": 0x00FFFF,
       "fields": [
@@ -81,7 +104,11 @@ let item = await notes.get(interaction.member.user.id)
           "name": `/bobux`,
           "value": ` - 100% legit free robux no joke guys`,
           "inline": true
-        }
+        },{
+	  "name": `/forms`,
+          "value": ` - Creates a form for people to use and send results to a channel`,
+          "inline": true
+	}
       ],
       "footer": {
         "text": `akll bot is made by syntax7311`
@@ -209,6 +236,18 @@ app.get('/register_commands', async (req,res) =>{
       "name": "bobux",
       "description": "earn bobux",
       "options": []
+    },{
+      "name": "forms",
+      "description": "creates a form and sends to channel",
+      "type": 1,
+      "options": [{
+            "name": "name",
+            "description": "name of the form",
+            "type": 1,
+            "required": true,
+            
+        }
+]
     }
 	  /*{
       "name": "settings",
