@@ -56,8 +56,8 @@ let item = await notes.get(interaction.member.user.id)
     }
     if (interaction.data.custom_id == 'form_button'){
 	    return res.send({
-  "title": interaction.message.components.components.custom_id.split("_")[2],
-  "custom_id": interaction.message.components.components.custom_id.split("_")[2] + "modal",
+  "title": interaction.message.components.components.fname,
+  "custom_id": interaction.message.components.components.fname,
   "components": [{
     "type": 1,
     "components": [{
@@ -97,7 +97,8 @@ let item = await notes.get(interaction.member.user.id)
                     "type": 2,
                     "label": "Open " + interaction.data.options[0].value,
                     "style": 1,
-                    "custom_id": "form_button_" + interaction.data.options[0].value
+                    "custom_id": "form_button",
+		    "fname": interaction.data.options[0].value
                 }
             ]
 
