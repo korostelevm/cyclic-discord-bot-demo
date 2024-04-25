@@ -230,18 +230,17 @@ app.get('/register_commands', async (req,res) =>{
       "description": "earn bobux",
       "options": []
     },{
-       
-      "name": "forms",
-      "description": "creates a new form",
-      "options": [{
-            "name": "fname",
-            "description": "store a text in this bot",
-            "type": 1,
-            "required": true,
-            
-        }]
-    
+  "name": "forms",
+  "description": "creates a form for people to use",
+  "options": [
+    {
+      "type": 3,
+      "name": "fname",
+      "description": "name of the form",
+      "required": true
     }
+  ]
+}
 	  /*{
       "name": "settings",
       "description": "OWNER ONLY",
