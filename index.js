@@ -56,6 +56,7 @@ let item = await notes.get(interaction.member.user.id)
     }
     if (interaction.data.custom_id == 'form_button'){
 	    return res.send({
+  "type": 4
   "title": interaction.message.components.components.fname,
   "custom_id": interaction.message.components.components.fname,
   "components": [{
