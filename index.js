@@ -66,7 +66,7 @@ let item = await notes.get(interaction.member.user.id)
             "components": [
                 {
                     "type": 2,
-                    "label": "Open the form",
+                    "label": "Open " + interaction.data.options[0].value,
                     "style": 1,
                     "custom_id": "form_button"
                 }
