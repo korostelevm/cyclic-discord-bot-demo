@@ -57,10 +57,12 @@ let item = await notes.get(interaction.member.user.id)
     if (interaction.data.custom_id == 'form_button'){
 	    return res.send({
   
-  "title": interaction.data.fname,
-  "custom_id": interaction.data.fname,
-  "type": 4,
-  "components": [{
+  title: interaction.data.fname,
+  custom_id: interaction.data.fname,
+  type: InteractionResponseType,
+  data: {
+  content: "",
+  components: [{
     "type": 1,
     "components": [{
       "type": 4,
@@ -83,7 +85,7 @@ let item = await notes.get(interaction.member.user.id)
       "required": true
     }]
   }]
-})
+}})
     }
     if (interaction.data.name == 'forms'){
 	    return res.send({
