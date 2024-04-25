@@ -230,16 +230,17 @@ app.get('/register_commands', async (req,res) =>{
       "description": "earn bobux",
       "options": []
     },{
+       
       "name": "forms",
-      "description": "creates a form and sends to channel",
-      "options": [
-        {
+      "description": "creates a new form",
+      "options": [{
             "name": "fname",
-            "description": "Name of the form",
+            "description": "store a text in this bot",
             "type": 1,
-            "required": true
-        }
-    ]
+            "required": true,
+            
+        }]
+    
     }
 	  /*{
       "name": "settings",
