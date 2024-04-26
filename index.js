@@ -36,27 +36,7 @@ const discord_api = axios.create({
   }
 });
 app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
-  const interaction = req.body;
-  console.log(interaction)
-
-  if (interaction.type === InteractionType.APPLICATION_COMMAND) {
-    // console.log(interaction.data.name)
-    if(interaction.data.name == 'yo'){
-	    let leo = await notes.set(interaction.member.user.id, {
-type: interaction.data.options[0].value
-})
-
-// get an item at key "leo" from collection animals
-let item = await notes.get(interaction.member.user.id)
-
-      return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          content: item.props.type
-      }});
-    }
-    
-    if (interaction.data.custom_id == 'form_button'){
+	if (interaction.data.custom_id == 'form_button'){
 	    const title = interaction.data.fname || 'Form'; // Set default title if missing
 	    return res.send(
 
@@ -94,6 +74,25 @@ let item = await notes.get(interaction.member.user.id)
     }
   })
     }
+
+  if (interaction.type === InteractionType.APPLICATION_COMMAND) {
+    // console.log(interaction.data.name)
+    if(interaction.data.name == 'yo'){
+	    let leo = await notes.set(interaction.member.user.id, {
+type: interaction.data.options[0].value
+})
+
+// get an item at key "leo" from collection animals
+let item = await notes.get(interaction.member.user.id)
+
+      return res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          content: item.props.type
+      }});
+    }
+    
+    
     if (interaction.data.name === 'forms') {
   if (interaction.data.options && interaction.data.options.length > 0) {
     const formName = interaction.data.options[0].value;
