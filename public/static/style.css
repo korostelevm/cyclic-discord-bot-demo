@@ -1,8 +1,14 @@
 body {
     color: whitesmoke;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 #topbar {
  color: grey;
- size: 50px, 20px;
- float: top;
+ width: 50px;
+ height: 20px;
+ top: 0;
+ left: 0;
+ text-decoration: black;
+ text-align: left;
+ word-spacing: 10%;
 }

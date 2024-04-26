@@ -24,7 +24,7 @@ const app = express();
 // app.use(bodyParser.json());
 const cookieParser = require("cookie-parser");
 app.use(cookieParser())
-app.use(express.static('./public/static'));
+app.use('/static', express.static('./public/static'));
 app.set('view engine', 'ejs');
 app.set('views', "./public")
 const discord_api = axios.create({
