@@ -41,8 +41,7 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
 	    const title = interaction.data.fname || 'Form'; // Set default title if missing
 	    return res.send(
 
-  {
-    type: 1, // Interaction response type for message
+  { // Interaction response type for message
     data: {
       content: "", // Consider adding instructions here
       components: [
