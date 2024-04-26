@@ -1,7 +1,7 @@
 body {
     color: whitesmoke;
 }
-topbar {
+#topbar {
  color: grey;
  size: 50px, 20px;
  float: top;
