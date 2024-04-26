@@ -96,7 +96,13 @@ let item = await notes.get(interaction.member.user.id)
   } else {
     console.log("nothing")
   }
-}
+}   if(interaction.data.name == 'game'){
+  return res.send({
+    type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+    data: {
+"content": "W.I.P",
+"tts": false}})
+    }
     if(interaction.data.name == 'help'){
       const message = await notes.get("0")
       const preference_c = await pref.get(interaction.guild_id)
@@ -109,10 +115,15 @@ let item = await notes.get(interaction.member.user.id)
   "embeds": [
     {
       "type": "rich",
-      "title": `? kakll Help (0.1.4 (Beta) Some Update) ?`,
+      "title": `? kakll Help (0.1.5 (Beta) Game Update) ?`,
       "description": `<b>akll bot comands and programs</b>\n${message.props.message}`,
       "color": color,
       "fields": [
+        {
+           "name": `/game`,
+           "value": ` - Play a game`,
+           "inline": true
+        },
         {
           "name": `/dm`,
           "value": ` - Sends you a DM`,
@@ -233,7 +244,20 @@ app.get('/register_commands', async (req,res) =>{
 	  {
       "name": "game",
       "description": "play a game",
-      "options": []
+      "options": [
+        {
+          "name": "game",
+          "description": "play a game",
+          "type": 3,
+          "required": true,
+          "choices": [
+            {
+               "name": "Scissors Paper Rock",
+               "value": "spr_game"
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "dm",
@@ -314,7 +338,7 @@ e3.array.forEach(element => {
   
 }); */
      return res.render('index', {
-      username: JSON.stringify(e2)
+      username: JSON.stringify(e2).global_name
      })
     } catch(e) {
       console.error(e)
