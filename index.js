@@ -55,9 +55,10 @@ let item = await notes.get(interaction.member.user.id)
       }});
     }
     if (interaction.data.custom_id == 'form_button'){
-	    return res.send(const title = interaction.data.fname || 'Form Submission'; // Set default title if missing
+	    const title = interaction.data.fname || 'Form Submission'; // Set default title if missing
+	    return res.send(
 
-  const response = {
+  {
     type: 1, // Interaction response type for message
     data: {
       content: "", // Consider adding instructions here
@@ -66,7 +67,7 @@ let item = await notes.get(interaction.member.user.id)
           type: 1, // Row for form elements
           components: [
             {
-              type: 4, // Text input element
+              type: 4,
               custom_id: "name",
               label: "Name",
               style: 1, // TextInputStyle (check Discord API documentation for exact value)
