@@ -55,63 +55,71 @@ let item = await notes.get(interaction.member.user.id)
       }});
     }
     if (interaction.data.custom_id == 'form_button'){
-	    return res.send({
-  
-  title: interaction.data.fname,
-  custom_id: interaction.data.fname,
-  type: InteractionResponseType,
-  data: {
-  content: "",
-  components: [{
-    "type": 1,
-    "components": [{
-      "type": 4,
-      "custom_id": "name",
-      "label": "Name",
-      "style": 1,
-      "min_length": 1,
-      "max_length": 4000,
-      "placeholder": "enter your name here",
-      "required": true
-    },
-		  {
-      "type": 4,
-      "custom_id": "description",
-      "label": "Description",
-      "style": 1,
-      "min_length": 1,
-      "max_length": 4000,
-      "placeholder": "it could be anything",
-      "required": true
-    }]
-  }]
-}})
-    }
-    if (interaction.data.name == 'forms'){
-	    return res.send({
-	     type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-	     data: {
-		     "content": "A form has appeared",
-		     "tts": false,
-		     "fname": interaction.data.options[0].value,
-		     "components": [
-        {
-            "type": 1,
-            "components": [
-                {
-                    "type": 2,
-                    "label": "Open " + interaction.data.options[0].value,
-                    "style": 1,
-                    "custom_id": "form_button",
-		    
-                }
-            ]
+	    return res.send(const title = interaction.data.fname || 'Form Submission'; // Set default title if missing
 
+  const response = {
+    type: 1, // Interaction response type for message
+    data: {
+      content: "", // Consider adding instructions here
+      components: [
+        {
+          type: 1, // Row for form elements
+          components: [
+            {
+              type: 4, // Text input element
+              custom_id: "name",
+              label: "Name",
+              style: 1, // TextInputStyle (check Discord API documentation for exact value)
+              min_length: 1,
+              max_length: 4000,
+              placeholder: "enter your name here",
+              required: true
+            },
+            {
+              type: 4, // Text input element
+              custom_id: "description",
+              label: "Description",
+              style: 1, // TextInputStyle (check Discord API documentation for exact value)
+              min_length: 1,
+              max_length: 4000,
+              placeholder: "it could be anything",
+              required: true
+            }
+          ]
         }
-    ]
-	     }
-	    })
+      ]
     }
+  })
+    }
+    if (interaction.data.name === 'forms') {
+  if (interaction.data.options && interaction.data.options.length > 0) {
+    const formName = interaction.data.options[0].value;
+
+    return res.send({
+      type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+      data: {
+        content: "A form has appeared",
+        tts: false,
+        fname: formName,
+        components: [
+          {
+            type: 1,
+            components: [
+              {
+                type: 2,
+                label: "Open " + formName,
+                style: 1,
+                custom_id: "form_button",
+              }
+            ]
+          }
+        ]
+      }
+    });
+  } else {
+    console.log("nothing")
+  }
+}
     if(interaction.data.name == 'help'){
       const message = await notes.get("0")
       return res.send({
