@@ -42,7 +42,7 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
 	    return res.send(
 
   {
-  "type": InteractionResponseType.MODAL, // Specify modal interaction type
+  "type": 4, // Specify modal interaction type
   "data": {
     "custom_id": title+ "- modal", // Set a unique ID for the modal
     "title": title,  // Title displayed on the modal
