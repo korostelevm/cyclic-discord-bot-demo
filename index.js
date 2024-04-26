@@ -106,7 +106,7 @@ let item = await notes.get(interaction.member.user.id)
   "embeds": [
     {
       "type": "rich",
-      "title": `? kakll Help (0.1.4 (Beta) Forms Update) ?`,
+      "title": `? kakll Help (0.1.4 (Beta) Some Update) ?`,
       "description": `<b>akll bot comands and programs</b>\n${message.props.message}`,
       "color": 0x00FFFF,
       "fields": [
@@ -121,7 +121,7 @@ let item = await notes.get(interaction.member.user.id)
           "inline": true
         },{
           "name": `/bobux`,
-          "value": ` - 100% legit free robux no joke guys`,
+          "value": ` - No Context`,
           "inline": true
         },{
 	  "name": `/forms`,
