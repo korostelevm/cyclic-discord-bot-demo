@@ -41,38 +41,40 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
 	    const title = interaction.data.fname || 'Form'; // Set default title if missing
 	    return res.send(
 
-  { // Interaction response type for message
-    data: {
-      content: "", // Consider adding instructions here
-      components: [
-        {
-          type: 1, // Row for form elements
-          components: [
-            {
-              type: 4,
-              custom_id: "name",
-              label: "Name",
-              style: 1, // TextInputStyle (check Discord API documentation for exact value)
-              min_length: 1,
-              max_length: 4000,
-              placeholder: "enter your name here",
-              required: true
-            },
-            {
-              type: 4, // Text input element
-              custom_id: "description",
-              label: "Description",
-              style: 1, // TextInputStyle (check Discord API documentation for exact value)
-              min_length: 1,
-              max_length: 4000,
-              placeholder: "it could be anything",
-              required: true
-            }
-          ]
-        }
-      ]
-    }
-  })
+  {
+  "type": InteractionResponseType.MODAL, // Specify modal interaction type
+  "data": {
+    "custom_id": title+ "- modal", // Set a unique ID for the modal
+    "title": title,  // Title displayed on the modal
+    "components": [
+      {
+        "type": 1, // Row for form elements
+        "components": [
+          {
+            "type": 4,
+            "custom_id": "name",
+            "label": "Name",
+            "style": 1, // Set appropriate style (Short, Paragraph)
+            "min_length": 1,
+            "max_length": 255,  // Adjust max length as needed (Discord limit for usernames)
+            "placeholder": "enter your name here",
+            "required": true
+          },
+          {
+            "type": 4,
+            "custom_id": "description",
+            "label": "Description",
+            "style": TextInputStyle.Paragraph, // Set appropriate style
+            "min_length": 1,
+            "max_length": 4000,  // Adjust max length as needed
+            "placeholder": "it could be anything",
+            "required": true
+          }
+        ]
+      }
+    ]
+  }
+})
     }
 
   if (interaction.type === InteractionType.APPLICATION_COMMAND) {
