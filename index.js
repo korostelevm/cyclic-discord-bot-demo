@@ -40,7 +40,7 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
 	const interaction = req.body
 	if (interaction.data.custom_id == 'form_button'){
 	    const title = interaction.data.fname || 'Form'; // Set default title if missing
-	    return interactions.parseRequest(req).showModal({
+	    return interactions.handleInteraction(req.body).showModal({
     custom_id: 'your_unique_modal_id', // Set a unique ID for the modal
     title: title,  // Title displayed on the modal
     components: [
