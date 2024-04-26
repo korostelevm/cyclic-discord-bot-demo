@@ -38,40 +38,16 @@ const discord_api = axios.create({
 });
 app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
 	const interaction = req.body
+	if (interaction.type === InteractionType.BUTTON_CLICK){
 	if (interaction.data.custom_id == 'form_button'){
 	    const title = interaction.data.fname || 'Form'; // Set default title if missing
-	    return interactions.showModal({
-    custom_id: 'your_unique_modal_id', // Set a unique ID for the modal
-    title: title,  // Title displayed on the modal
-    components: [
-      {
-        type: 1, // Row for form elements
-        components: [
-          {
-            type: 4,
-            custom_id: "name",
-            label: "Name",
-            style: 1, // TextInputStyle.Short
-            min_length: 1,
-            max_length: 255,
-            placeholder: "enter your name here",
-            required: true
-          },
-          {
-            type: 4,
-            custom_id: "description",
-            label: "Description",
-            style: 2, // TextInputStyle.Paragraph
-            min_length: 1,
-            max_length: 4000,
-            placeholder: "it could be anything",
-            required: true
-          }
-        ]
-      }
-    ]
-  })
-    }
+	    return res.send({
+		    type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+		    data: {
+			    content: "WIP feature"
+		    }
+	    })
+    }}
 
   if (interaction.type === InteractionType.APPLICATION_COMMAND) {
     // console.log(interaction.data.name)
@@ -149,7 +125,7 @@ let item = await notes.get(interaction.member.user.id)
           "inline": true
         },{
 	  "name": `/forms`,
-          "value": ` - Creates a form for people to use and send results to a channel`,
+          "value": ` - W.I.P`,
           "inline": true
 	}
       ],
