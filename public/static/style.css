@@ -1,6 +1,7 @@
 body {
     color: whitesmoke;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: "Nanum Gothic", "Poppins", sans-serif;
+    text-decoration: black;
 }
 #topbar {
  color: grey;
@@ -11,4 +12,10 @@ body {
  text-decoration: black;
  text-align: left;
  word-spacing: 10%;
+}
+#topbar-button {
+    border-color: lightskyblue;
+    width: 100%;
+    height: 100%;
+    text-align: center;
 }
