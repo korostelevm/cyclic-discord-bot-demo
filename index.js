@@ -338,7 +338,8 @@ e3.array.forEach(element => {
   
 }); */
      return res.render('index', {
-      username: e2.global_name
+      username: e2.global_name,
+      avatar: e2.avatar
      })
     } catch(e) {
       console.error(e)

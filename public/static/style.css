@@ -9,7 +9,8 @@ body {
  overflow: hidden;
 }
 .topbar a, .topbar button{
-    border-color: lightskyblue;
+    border-left-color: lightskyblue;
+    border-right-color: lightskyblue;
     background-color: rgb(31, 31, 31);
     float: left;
   color: #f2f2f2;
@@ -20,4 +21,7 @@ body {
 }
 .topbar a:hover {
     opacity: 75%;
+}
+.topbar a.active {
+    background-color: lightskyblue;
 }
