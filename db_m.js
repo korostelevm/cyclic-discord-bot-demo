@@ -3,8 +3,8 @@ module.exports = {
         "color",
         "timezone"
     ],
-    settings: function (object, userid, json) {
-      object.set(userid, json)
+    settings: async function (object, userid, json) {
+      await object.set(userid, json)
     },
     bar: function () {
       // whatever

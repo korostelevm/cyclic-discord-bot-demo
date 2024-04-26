@@ -98,6 +98,8 @@ let item = await notes.get(interaction.member.user.id)
 }
     if(interaction.data.name == 'help'){
       const message = await notes.get("0")
+      const preference_c = await pref.get(interaction.guild_id)
+      const color = preference_c.color
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
@@ -108,7 +110,7 @@ let item = await notes.get(interaction.member.user.id)
       "type": "rich",
       "title": `? kakll Help (0.1.4 (Beta) Some Update) ?`,
       "description": `<b>akll bot comands and programs</b>\n${message.props.message}`,
-      "color": 0x00FFFF,
+      "color": color,
       "fields": [
         {
           "name": `/dm`,
