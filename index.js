@@ -99,7 +99,7 @@ let item = await notes.get(interaction.member.user.id)
     if(interaction.data.name == 'help'){
       const message = await notes.get("0")
       const preference_c = await pref.get(interaction.guild_id)
-      const color = 0x00FFFF ?? preference_c.color
+      const color = preference_c.color ?? 0x00FFFF
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
