@@ -15,21 +15,21 @@ module.exports = function(pref, req, res){
       switch (currentprefs.color){
       case 'blue':
         currentprefs.color = 0x00FFFF
-        break;
+   
       case 'red':
         currentprefs.color = 0xFF0000
-        break;
+   
       case 'green':
         currentprefs.color = 0x00FF00
-        break;
+   
       case 'purple':
         currentprefs.color = 0x800080
-        break;
+   
       default: 
         currentprefs.color = 0x00FFFF
       }
       database.settings(pref, guild, currentprefs)
-      return res.status(204)
+      return res.status(200)
     }
    }catch(e){
     console.error(e)
