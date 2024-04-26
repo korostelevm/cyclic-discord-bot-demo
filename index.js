@@ -17,7 +17,7 @@ const pref = db.collection("pref")
 
 const axios = require('axios')
 const express = require('express');
-const { InteractionType, InteractionResponseType, verifyKeyMiddleware, showModal} = require('discord-interactions');
+const { InteractionType, InteractionResponseType, verifyKeyMiddleware, parseRequest} = require('discord-interactions');
 
 const app = express();
 // app.use(bodyParser.json());
@@ -39,7 +39,8 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
 	const interaction = req.body
 	if (interaction.data.custom_id == 'form_button'){
 	    const title = interaction.data.fname || 'Form'; // Set default title if missing
-	    showModal({
+	    const inte = parseRequest(req)
+	    inte.showModal({
     custom_id: 'your_unique_modal_id', // Set a unique ID for the modal
     title: title,  // Title displayed on the modal
     components: [
