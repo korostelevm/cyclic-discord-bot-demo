@@ -10,7 +10,7 @@ body {
  overflow: hidden;
  word-spacing: 10%;
 }
-.topbar a {
+.topbar a, .topbar button{
     border-color: lightskyblue;
     background-color: rgb(31, 31, 31);
     width: 100%;
