@@ -110,7 +110,7 @@ let item = await notes.get(interaction.member.user.id)
       "type": "rich",
       "title": `? kakll Help (0.1.4 (Beta) Some Update) ?`,
       "description": `<b>akll bot comands and programs</b>\n${message.props.message}`,
-      "color": color ?? 0x00FFFF,
+      "color": 0x00FFFF ?? color,
       "fields": [
         {
           "name": `/dm`,
