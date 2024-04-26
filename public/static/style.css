@@ -6,19 +6,17 @@ body {
 }
 .topbar {
  background-color: rgb(31, 31, 31);
- text-align: left;
  overflow: hidden;
- word-spacing: 10%;
 }
 .topbar a, .topbar button{
     border-color: lightskyblue;
     background-color: rgb(31, 31, 31);
-    width: 100%;
-    height: 100%;
-    padding: 14px 16px;
-    text-align: center;
-    float:left;
-    opacity: 100%
+    float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
 }
 .topbar a:hover {
     opacity: 75%;
