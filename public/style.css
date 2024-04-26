@@ -1,0 +1,8 @@
+body {
+    color: whitesmoke;
+}
+topbar {
+ color: grey;
+ size: 50px, 20px;
+ float: top;
+}
