@@ -37,6 +37,7 @@ const discord_api = axios.create({
 });
 app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
   const interaction = req.body;
+  console.log(interaction)
 
   if (interaction.type === InteractionType.APPLICATION_COMMAND) {
     // console.log(interaction.data.name)
@@ -54,8 +55,9 @@ let item = await notes.get(interaction.member.user.id)
           content: item.props.type
       }});
     }
+    
     if (interaction.data.custom_id == 'form_button'){
-	    const title = interaction.data.fname || 'Form Submission'; // Set default title if missing
+	    const title = interaction.data.fname || 'Form'; // Set default title if missing
 	    return res.send(
 
   {
