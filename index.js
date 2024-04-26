@@ -64,7 +64,7 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
             "type": 4,
             "custom_id": "description",
             "label": "Description",
-            "style": TextInputStyle.Paragraph, // Set appropriate style
+            "style": 1, // Set appropriate style
             "min_length": 1,
             "max_length": 4000,  // Adjust max length as needed
             "placeholder": "it could be anything",
