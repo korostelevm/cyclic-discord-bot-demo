@@ -338,7 +338,7 @@ e3.array.forEach(element => {
   
 }); */
      return res.render('index', {
-      username: JSON.stringify(e2).global_name
+      username: e2.global_name
      })
     } catch(e) {
       console.error(e)
