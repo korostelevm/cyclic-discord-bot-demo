@@ -17,7 +17,7 @@ const pref = db.collection("pref")
 
 const axios = require('axios')
 const express = require('express');
-const { InteractionType, InteractionResponseType, verifyKeyMiddleware } = require('discord-interactions');
+const { InteractionType, InteractionResponseType, verifyKeyMiddleware, showModal} = require('discord-interactions');
 
 const app = express();
 // app.use(bodyParser.json());
@@ -39,42 +39,37 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
 	const interaction = req.body
 	if (interaction.data.custom_id == 'form_button'){
 	    const title = interaction.data.fname || 'Form'; // Set default title if missing
-	    return res.send(
-
-  {
-  "type": 4, // Specify modal interaction type
-  "data": {
-    "custom_id": title+ "- modal", // Set a unique ID for the modal
-    "title": title,  // Title displayed on the modal
-    "components": [
+	    showModal({
+    custom_id: 'your_unique_modal_id', // Set a unique ID for the modal
+    title: title,  // Title displayed on the modal
+    components: [
       {
-        "type": 1, // Row for form elements
-        "components": [
+        type: 1, // Row for form elements
+        components: [
           {
-            "type": 4,
-            "custom_id": "name",
-            "label": "Name",
-            "style": 1, // Set appropriate style (Short, Paragraph)
-            "min_length": 1,
-            "max_length": 255,  // Adjust max length as needed (Discord limit for usernames)
-            "placeholder": "enter your name here",
-            "required": true
+            type: 4,
+            custom_id: "name",
+            label: "Name",
+            style: 1, // TextInputStyle.Short
+            min_length: 1,
+            max_length: 255,
+            placeholder: "enter your name here",
+            required: true
           },
           {
-            "type": 4,
-            "custom_id": "description",
-            "label": "Description",
-            "style": 1, // Set appropriate style
-            "min_length": 1,
-            "max_length": 4000,  // Adjust max length as needed
-            "placeholder": "it could be anything",
-            "required": true
+            type: 4,
+            custom_id: "description",
+            label: "Description",
+            style: 2, // TextInputStyle.Paragraph
+            min_length: 1,
+            max_length: 4000,
+            placeholder: "it could be anything",
+            required: true
           }
         ]
       }
     ]
-  }
-})
+  })
     }
 
   if (interaction.type === InteractionType.APPLICATION_COMMAND) {
