@@ -7,14 +7,6 @@ const pastelgate = require('./pastelgate')
 const pref_web = require('./api')
 const cool = require('./db_m')
 const { APPLICATION_ID, TOKEN, PUBLIC_KEY } = process.env
-const CyclicDb = require("@cyclic.sh/dynamodb")
-const db = CyclicDb("charming-jade-dholeCyclicDB")
-const notes = db.collection("notes")
-
-const robux = db.collection("bobux")
-
-const pref = db.collection("pref")
-
 const axios = require('axios')
 const express = require('express');
 const { InteractionType, InteractionResponseType, verifyKeyMiddleware } = require('discord-interactions');
@@ -53,19 +45,21 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
   if (interaction.type === InteractionType.APPLICATION_COMMAND) {
     // console.log(interaction.data.name)
     if(interaction.data.name == 'yo'){
-	    let leo = await notes.set(interaction.member.user.id, {
-type: interaction.data.options[0].value
-})
-
-// get an item at key "leo" from collection animals
-let item = await notes.get(interaction.member.user.id)
-
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-          content: item.props.type
+          content: "Yo!"
       }});
     }
+}
+
+// get an item at key "leo" from collection animals
+return res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          content: "WIP"
+      }});
+    })
     
     
     if (interaction.data.name === 'forms') {
@@ -104,9 +98,7 @@ let item = await notes.get(interaction.member.user.id)
 "tts": false}})
     }
     if(interaction.data.name == 'help'){
-      const message = await notes.get("0")
-      const preference_c = await pref.get(interaction.guild_id)
-      const color = 0x00FFFF ?? preference_c.color
+      const color = 0x00FFFF
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
@@ -116,7 +108,7 @@ let item = await notes.get(interaction.member.user.id)
     {
       "type": "rich",
       "title": `? kakll Help (0.1.5 (Beta) Game Update) ?`,
-      "description": `<b>akll bot comands and programs</b>\n${message.props.message}`,
+      "description": `<b>akll bot comands and programs</b>`,
       "color": color,
       "fields": [
         {
@@ -167,7 +159,7 @@ function whosPaying(amount) {
     let PersonBuyingLunch = Math.floor(Math.random() * upperBound)
     return names[PersonBuyingLunch] 
 }
-	    let item = await robux.get(interaction.member.user.id) ?? 0
+	   /* let item = await robux.get(interaction.member.user.id) ?? 0
 	    let hey = whosPaying(amount)
 	    let result = item + hey
 	    let leo = await robux.set(interaction.member.user.id, {
@@ -175,11 +167,11 @@ bobux: result
 })
 
 // get an item at key "leo" from collection animals
-item = await robux.get(interaction.member.user.id)
+item = await robux.get(interaction.member.user.id)*/
 	    res.send({ 
 		    type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
 		    data: {
-                       content: item.props.bobux
+                       content: "WIP"
                     }
 	})
     }
@@ -220,9 +212,7 @@ item = await robux.get(interaction.member.user.id)
         }
       });
     }
-  }
 
-});
 
 
 
