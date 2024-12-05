@@ -19,7 +19,7 @@ app.use(cookieParser())
 app.use('/static', express.static('./public/static'));
 app.set('view engine', 'ejs');
 app.set('views', "./public")
-const status = new WebSocket('wss://gateway.discord.gg/?v=9&encoding=json')
+/*const status = new WebSocket('wss://gateway.discord.gg/?v=9&encoding=json')
 status.addEventListener("open", function(){
   status.send(JSON.stringify({
   "op": 3,
@@ -33,7 +33,7 @@ status.addEventListener("open", function(){
     "afk": false
   }
 }))
-})
+})*/
 
 const discord_api = axios.create({
   baseURL: 'https://discord.com/api/',
@@ -66,7 +66,7 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data:{
-          content: "Calling📞"
+          content: "Calling📞..."
         }
       })
     }
@@ -293,6 +293,18 @@ app.get('/register_commands', async (req, res) => {
           "type": 3,
           "name": "fname",
           "description": "name of the form",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "call",
+      "description": "phone a friend",
+      "options": [
+        {
+          "type": 3,
+          "name": "username",
+          "description": "friend to call",
           "required": true
         }
       ]
