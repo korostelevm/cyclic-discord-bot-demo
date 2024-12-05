@@ -20,7 +20,8 @@ app.use('/static', express.static('./public/static'));
 app.set('view engine', 'ejs');
 app.set('views', "./public")
 const status = new WebSocket('wss://gateway.discord.gg/?v=9&encoding=json')
-status.send(JSON.stringify({
+status.addEventListener("open", function(){
+  status.send(JSON.stringify({
   "op": 3,
   "d": {
     "since": 91879201,
@@ -32,6 +33,8 @@ status.send(JSON.stringify({
     "afk": false
   }
 }))
+})
+
 const discord_api = axios.create({
   baseURL: 'https://discord.com/api/',
   timeout: 3000,
