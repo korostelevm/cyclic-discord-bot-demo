@@ -54,16 +54,6 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
       });
     }
   }
-
-  // get an item at key "leo" from collection animals
-  return res.send({
-    type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-    data: {
-      content: "WIP"
-    }
-  });
-
-
 if (interaction.data.name === 'forms') {
   if (interaction.data.options && interaction.data.options.length > 0) {
     const formName = interaction.data.options[0].value;
