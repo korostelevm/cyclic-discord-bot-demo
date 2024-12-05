@@ -44,7 +44,7 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
   }
 
   if (interaction.type === InteractionType.APPLICATION_COMMAND) {
-    // console.log(interaction.data.name)
+    console.log(interaction.data.name)
     if (interaction.data.name == 'yo') {
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
