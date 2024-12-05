@@ -19,6 +19,19 @@ app.use(cookieParser())
 app.use('/static', express.static('./public/static'));
 app.set('view engine', 'ejs');
 app.set('views', "./public")
+const status = new WebSocket('wss://gateway.discord.gg/?v=9&encoding=json')
+status.send(JSON.stringify({
+  "op": 3,
+  "d": {
+    "since": 91879201,
+    "activities": [{
+      "name": "/help",
+      "type": 0
+    }],
+    "status": "online",
+    "afk": false
+  }
+}))
 const discord_api = axios.create({
   baseURL: 'https://discord.com/api/',
   timeout: 3000,
