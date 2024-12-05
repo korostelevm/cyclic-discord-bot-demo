@@ -62,7 +62,6 @@ app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
       content: "WIP"
     }
   });
-})
 
 
 if (interaction.data.name === 'forms') {
@@ -216,7 +215,7 @@ item = await robux.get(interaction.member.user.id)*/
       content:'👍'
     }
   });
-}*/
+}*/})
 
 
 
