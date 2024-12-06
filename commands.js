@@ -7,24 +7,29 @@ module.exports = [
            .setDescription("all commands"),
         execute: async function(interaction){
             const exampleEmbed = new EmbedBuilder()
-            .setColor(0x0099FF)
-            .setTitle('Some title')
-            .setURL('https://discord.js.org/')
-            .setAuthor({ name: 'Some name', iconURL: 'https://i.imgur.com/AfFp7pu.png', url: 'https://discord.js.org' })
-            .setDescription('Some description here')
-            .setThumbnail('https://i.imgur.com/AfFp7pu.png')
+            .setColor(0x00FFFF)
+            .setTitle('? kakll Help (0.1.5 (Beta) Game Update) ?')
+            .setURL('https://starter-discord-bot-73vg.onrender.com/')
+            .setDescription('Commands and features for kaklll')
             .addFields(
-                { name: 'Regular field title', value: 'Some value here' },
-                { name: '\u200B', value: '\u200B' },
-                { name: 'Inline field title', value: 'Some value here', inline: true },
-                { name: 'Inline field title', value: 'Some value here', inline: true },
+                { name: '/game', value: 'Play a game (WIP)' },
+                { name: '/help', value: 'Help and commands' },
+                { name: '/bobux', value: 'Bobux generator real' },
+                { name: '/yo', value: 'Yo!' },
+                { name: '/forms', value: 'Generate a form (WIP)' },
             )
-            .addFields({ name: 'Inline field title', value: 'Some value here', inline: true })
-            .setImage('https://i.imgur.com/AfFp7pu.png')
             .setTimestamp()
-            .setFooter({ text: 'Some footer text here', iconURL: 'https://i.imgur.com/AfFp7pu.png' });
+            .setFooter({ text: 'kakll bot made by syntax7311' });
         
             await interaction.reply({ embeds: [exampleEmbed] });
         }
+    },
+    {
+        data: new SlashCommandBuilder()
+            .setName("game")
+            .setDescription("play a game"),
+        execute: async function(interaction){
+            await interaction.reply("W.I.P")
+        }
     }
-]
+] 
