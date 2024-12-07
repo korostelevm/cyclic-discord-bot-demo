@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder } = require("discord.js");
 
 module.exports = [
     {
@@ -29,7 +29,30 @@ module.exports = [
             .setName("game")
             .setDescription("play a game"),
         execute: async function(interaction){
-            await interaction.reply("W.I.P")
+            await interaction.reply({content:"W.I.P"})
+        }
+    },
+    {
+        data: new SlashCommandBuilder()
+            .setName("yo")
+            .setDescription("Yo!"),
+        execute: async function(interaction){
+            await interaction.reply({content:"Yo!"})
+        }
+    },
+    {
+        data: new SlashCommandBuilder()
+            .setName("forms")
+            .setDescription("Create a form"),
+        execute: async function (interaction) {
+            const embed = new EmbedBuilder()
+                .setTitle("A form has appeared")
+                .setDescription(interaction.data.options[0].value)
+            const button = new ButtonBuilder()
+                .setCustomId('button-')
+			    .setLabel('Open ' + interaction.data.options[0].value)
+			    .setStyle(ButtonStyle.Primary);
+            await interaction.reply({embeds:[embed,button]})
         }
     }
 ] 
