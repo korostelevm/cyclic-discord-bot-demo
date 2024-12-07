@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="static/style.css" rel="stylesheet">
+  </head>
+  <body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js"></script>
+<script>
+    function yes(){
+      Cookies.set('access_key', '<%= key%>', { expires: 7 });
+      window.location.replace("/");
+    }
+    function no(){
+        window.location.replace("/");
+    }
+</script>
+<p>Are you <%= username %>?</p>
+<button onclick="no()">No</button>
+<button onclick="yes()">Yes</button>
+  </body>
+</html>

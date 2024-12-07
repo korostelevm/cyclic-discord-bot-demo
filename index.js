@@ -1,113 +1,132 @@
-
-// const { clientId, guildId, token, publicKey } = require('./config.json');
 require('dotenv').config()
-const APPLICATION_ID = process.env.APPLICATION_ID 
-const TOKEN = process.env.TOKEN 
-const PUBLIC_KEY = process.env.PUBLIC_KEY || 'not set'
-const GUILD_ID = process.env.GUILD_ID 
 
-
+const { request } = require('undici');
+const pastelgate = require('./pastelgate')
+const pref_web = require('./api')
+const cool = require('./db_m')
 const axios = require('axios')
+const commands = require('./commands.js')
 const express = require('express');
-const { InteractionType, InteractionResponseType, verifyKeyMiddleware } = require('discord-interactions');
-
 
 const app = express();
 // app.use(bodyParser.json());
-
-const discord_api = axios.create({
-  baseURL: 'https://discord.com/api/',
-  timeout: 3000,
-  headers: {
-	"Access-Control-Allow-Origin": "*",
-	"Access-Control-Allow-Methods": "GET, POST, PUT, DELETE",
-	"Access-Control-Allow-Headers": "Authorization",
-	"Authorization": `Bot ${TOKEN}`
-  }
-});
+const cookieParser = require("cookie-parser");
+app.use(cookieParser())
+app.use('/static', express.static('./public/static'));
+app.set('view engine', 'ejs');
+app.set('views', "./public")
+const { Client, Events, GatewayIntentBits, Collection } = require('discord.js');
+const { APPLICATION_ID, TOKEN, PUBLIC_KEY } = process.env
 
 
+// Create a new client instance
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-
-app.post('/interactions', verifyKeyMiddleware(PUBLIC_KEY), async (req, res) => {
-  const interaction = req.body;
-
-  if (interaction.type === InteractionType.APPLICATION_COMMAND) {
-    console.log(interaction.data.name)
-    if(interaction.data.name == 'yo'){
-      return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          content: `Yo ${interaction.member.user.username}!`,
-        },
-      });
-    }
-
-    if(interaction.data.name == 'dm'){
-      // https://discord.com/developers/docs/resources/user#create-dm
-      let c = (await discord_api.post(`/users/@me/channels`,{
-        recipient_id: interaction.member.user.id
-      })).data
-      try{
-        // https://discord.com/developers/docs/resources/channel#create-message
-        let res = await discord_api.post(`/channels/${c.id}/messages`,{
-          content:'Yo! I got your slash command. I am not able to respond to DMs just slash commands.',
+app.get('/', async (req, res) => {
+    console.log(req.cookies)
+    if (req.cookies.access_key) {
+      try {
+        const userResult = await request('https://discord.com/api/users/@me', {
+          headers: {
+            authorization: `Bearer ${req.cookies.access_key}`,
+          },
+        });
+        const e2 = await userResult.body.json()
+        /* const servers = await request("https://discord.com/api/v6/users/@me/guilds", {
+           headers: {
+               authorization: "Bot " + process.env.TOKEN
+           }
+       })
+       const e3 = await servers.body.json()
+       e3.array.forEach(element => {
+         
+       }); */
+        return res.render('index', {
+          username: e2.global_name,
+          avatar: e2.avatar
         })
-        console.log(res.data)
-      }catch(e){
-        console.log(e)
+      } catch (e) {
+        console.error(e)
+        return res.sendFile('/login.html', { 'root': "./public" });
       }
-
-      return res.send({
-        // https://discord.com/developers/docs/interactions/receiving-and-responding#responding-to-an-interaction
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data:{
-          content:'👍'
-        }
-      });
+  
+  
+    } else {
+      return res.sendFile('/login.html', { 'root': "./public" });
     }
-  }
+  
+  })
+  app.get('/gates', async ({ query }, res) => {
+    const { code } = query;
+  
+    if (code) {
+      try {
+        const tokenResponseData = await request('https://discord.com/api/oauth2/token', {
+          method: 'POST',
+          body: new URLSearchParams({
+            client_id: process.env.APPLICATION_ID,
+            client_secret: process.env.CLIENT_SECRET,
+            code,
+            grant_type: 'authorization_code',
+            redirect_uri: `https://aklll.cyclic.app/gates`,
+            scope: 'identify',
+          }).toString(),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+        });
+  
+        const oauthData = await tokenResponseData.body.json();
+        console.log(oauthData);
+        const userResult = await request('https://discord.com/api/users/@me', {
+          headers: {
+            authorization: `${oauthData.token_type} ${oauthData.access_token}`,
+          },
+        });
+        const e2 = await userResult.body.json()
+        console.log(e2)
+        return res.render("confirmation", {
+          "username": e2.global_name,
+          "key": oauthData.access_token
+        })
+      } catch (error) {
+        // NOTE: An unauthorized token will not throw an error
+        // tokenResponseData.statusCode will be 401
+        console.error(error);
+      }
+    }
+  
+  
+  })
 
+client.once(Events.ClientReady, readyClient => {
+	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
 });
+client.commands = new Collection()
 
+for (I in commands){
+  const command = commands[I]
+  client.commands.set(command.name, command.execute)
+}
+const rest = new REST().setToken(TOKEN);
 
+// and deploy your commands!
+(async () => {
+	try {
+		console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
-app.get('/register_commands', async (req,res) =>{
-  let slash_commands = [
-    {
-      "name": "yo",
-      "description": "replies with Yo!",
-      "options": []
-    },
-    {
-      "name": "dm",
-      "description": "sends user a DM",
-      "options": []
-    }
-  ]
-  try
-  {
-    // api docs - https://discord.com/developers/docs/interactions/application-commands#create-global-application-command
-    let discord_response = await discord_api.put(
-      `/applications/${APPLICATION_ID}/guilds/${GUILD_ID}/commands`,
-      slash_commands
-    )
-    console.log(discord_response.data)
-    return res.send('commands have been registered')
-  }catch(e){
-    console.error(e.code)
-    console.error(e.response?.data)
-    return res.send(`${e.code} error from discord`)
-  }
-})
+		// The put method is used to fully refresh all commands in the guild with the current set
+		const data = await rest.put(
+			Routes.applicationGuildCommands(APPLICATION_ID),
+			{ body: commands },
+		);
 
-
-app.get('/', async (req,res) =>{
-  return res.send('Follow documentation ')
-})
-
-
-app.listen(8999, () => {
-
-})
-
+		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
+	} catch (error) {
+		// And of course, make sure you catch and log any errors!
+		console.error(error);
+	}
+})();
+// Log in to Discord with your client's token
+app.listen(8999)
+client.login(TOKEN);

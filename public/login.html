@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<head>
+			<link href="static/style.css" rel="stylesheet">
+		</head>
+	</head>
+	<body>
+		<div class="topbar"><a>aklll</a><a><button class="active">Home</button></a><a><button class="topbar-button">Server</button></a></div>
+		<div id="info">Hoi!</div>
+<a id="login" style="display: none;" href="https://discord.com/oauth2/authorize?client_id=1040973296189046904&permissions=8&response_type=code&redirect_uri=https%3A%2F%2Fstarter-discord-bot-73vg.onrender.com%2Fgates&integration_type=0&scope=bot+identify+activities.read+applications.commands+dm_channels.messages.read">IdentYourself</a>
+<script>
+	function generateRandomString() {
+	let randomString = '';
+	const randomNumber = Math.floor(Math.random() * 10);
+
+	for (let I = 0; I < 20 + randomNumber; I++) {
+		randomString += String.fromCharCode(33 + Math.floor(Math.random() * 94));
+	}
+
+	return randomString;
+}
+
+	window.onload = () => {
+		const fragment = new URLSearchParams(window.location.hash.slice(1));
+		const [accessToken, tokenType] = [fragment.get('access_token'), fragment.get('token_type')];
+
+		if (!accessToken) {
+			const randomString = generateRandomString();
+		localStorage.setItem('oauth-state', randomString);
+
+		document.getElementById('login').href += `&state=${btoa(randomString)}`;
+		return (document.getElementById('login').style.display = 'block');
+		}
+
+		fetch('https://discord.com/api/users/@me', {
+			headers: {
+				authorization: `${tokenType} ${accessToken}`,
+			},
+		})
+			.then(result => result.json())
+			.then(response => {
+				const { username, discriminator } = response;
+				document.getElementById('info').innerText += ` ${username}#${discriminator}`;
+			})
+			.catch(console.error);
+	};
+</script>
+	</body>
+</html>

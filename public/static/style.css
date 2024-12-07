@@ -1,0 +1,27 @@
+body {
+    color: rgb(255, 255, 255);
+    font-family: "Nanum Gothic", "Poppins", sans-serif;
+    background-color: rgb(19, 19, 19);
+    text-shadow: 0 0 10px #fff, 0 0 15px #fff, 0 0 20px;
+}
+.topbar {
+ background-color: rgb(31, 31, 31);
+ overflow: hidden;
+}
+.topbar a, .topbar button{
+    border-left-color: lightskyblue;
+    border-right-color: lightskyblue;
+    background-color: rgb(31, 31, 31);
+    float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+.topbar a:hover {
+    opacity: 75%;
+}
+.topbar a.active {
+    background-color: lightskyblue;
+}
