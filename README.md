@@ -1,5 +1,6 @@
 # starter-discord-bot
 
+I remade this in python because i felt like it uwu
 Follow these instructions after deploying this repo on Cyclic.sh
 
 [![Deploy to Cyclic](https://deploy.cyclic.app/button.svg)](https://deploy.cyclic.app/)
